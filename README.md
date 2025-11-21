@@ -35,7 +35,5 @@ python train.py
 ---
 
 ## 📚 References  
-- Haarnoja et al., *Soft Actor-Critic*, ICML 2018. DOI: [10.48550/arXiv.1801.01290](https://doi.org/10.48550/arXiv.1801.01290)  
-- Brockman et al., *OpenAI Gym*, arXiv:1606.01540, 2016  
-- Todorov et al., *MuJoCo: A physics engine for model-based control*, IROS 2012  
-- Raffin et al., *Stable Baselines3*, JMLR 2021  
+- Haarnoja et al., *Soft Actor-Critic*, ICML 2018. DOI: [10.48550/arXiv.1801.01290](https://doi.org/10.48550/arXiv.1801.01290)    
+- Todorov et al., *MuJoCo: A physics engine for model-based control*, IROS 2012    
