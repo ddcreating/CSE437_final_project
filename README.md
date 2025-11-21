@@ -1,52 +1,41 @@
-# hopperv4-SAC
-solved hopper-v4 using SAC
-
-
-# Soft Actor-Critic (SAC) on Hopper-v4 with Evaluation, Hyperparameter Sensitivity, and Reward Shaping
-
-This project demonstrates the training, evaluation, and analysis of a Soft Actor-Critic (SAC) reinforcement learning agent on the `Hopper-v4` environment using `Stable-Baselines3`. It includes experiments with:
-- Evaluation using saved models
-- Plotting reward curves
-- Hyperparameter sensitivity analysis (learning rate, gamma, entropy coefficient)
-- Robustness testing with modified environment dynamics
-- Custom reward shaping
-- Comparison with a random agent baseline
+# Hopper-v4 SAC  
+Soft Actor-Critic (SAC) implementation for the **Hopper-v4** MuJoCo environment.
 
 ---
 
-## 🛠 Installation
+## 🧠 Overview  
+- Train and evaluate a SAC agent using **Stable-Baselines3** and **Gymnasium (MuJoCo)**  
+- Visualize learning performance and reward statistics  
+- Generate evaluation plots and summary metrics  
 
-To run the code in a Colab environment, ensure the following dependencies are installed:
+---
 
+## ⚙️ Installation  
+```bash
+pip install stable-baselines3[extra]
+pip install "gymnasium[mujoco]"
+pip install matplotlib seaborn
 ```
-!apt-get install -y swig
-!pip install stable-baselines3[extra] seaborn
-!pip install "gymnasium[mujoco]"
-!pip install box2d-py
+
+---
+
+## 🚀 Usage  
+```bash
+python train.py
 ```
 
-## 📊 Outputs
-Plots for:
-- Learning curves
-- Reward distributions
-- Hyperparameter sweep comparisons
+---
 
 
-Printout of evaluation results for:
-- Default SAC model
-- Random baseline
-- Shaped reward model
-- Modified gravity environment
+## 🧩 Future Work  
+- Extend to **Hopper-v5**  
+- Compare SAC with **PPO** and **TD3**  
+- Add robustness tests and reward shaping  
 
+---
 
-## 📚 References
-Stable-Baselines3 Docs
-
-
-Gymnasium
-
-
-MuJoCo Environments
-
-## 📌 Disclaimer:
-This project was developed as part of a personal learning journey in reinforcement learning. As such, it may include experimental implementations, non-optimized code, or areas for improvement. Feedback, suggestions, and contributions are always welcome!
+## 📚 References  
+- Haarnoja et al., *Soft Actor-Critic*, ICML 2018. DOI: [10.48550/arXiv.1801.01290](https://doi.org/10.48550/arXiv.1801.01290)  
+- Brockman et al., *OpenAI Gym*, arXiv:1606.01540, 2016  
+- Todorov et al., *MuJoCo: A physics engine for model-based control*, IROS 2012  
+- Raffin et al., *Stable Baselines3*, JMLR 2021  
