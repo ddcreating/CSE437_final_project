@@ -29,7 +29,7 @@ python train.py
 
 ## 🧩 Future Work  
 - Extend to **Hopper-v5**  
-- Compare SAC with **PPO** and **TD3**  
+- Compare SAC with **PPO**
 - Add robustness tests and reward shaping  
 
 ---
