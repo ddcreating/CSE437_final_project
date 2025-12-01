@@ -21,7 +21,7 @@ pip install matplotlib seaborn
 
 ## 🚀 Usage  
 ```bash
-python train.py
+python train_SAC.py / train_TD3.py
 ```
 
 ---
@@ -35,7 +35,12 @@ python train.py
 ---
 
 ## 📚 References  
+<<<<<<< HEAD
 - Haarnoja et al., *Soft Actor-Critic*, ICML 2018. DOI: [10.48550/arXiv.1801.01290](https://doi.org/10.48550/arXiv.1801.01290)  
 - Brockman et al., *OpenAI Gym*, arXiv:1606.01540, 2016  
 - Todorov et al., *MuJoCo: A physics engine for model-based control*, IROS 2012  
 - Raffin et al., *Stable Baselines3*, JMLR 2021  
+=======
+- Haarnoja et al., *Soft Actor-Critic*, ICML 2018. DOI: [10.48550/arXiv.1801.01290](https://doi.org/10.48550/arXiv.1801.01290)    
+- Todorov et al., *MuJoCo: A physics engine for model-based control*, IROS 2012    
+>>>>>>> 97e346b9ba386a57812896b12b6723e42f691144
