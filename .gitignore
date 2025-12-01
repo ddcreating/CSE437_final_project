@@ -1,0 +1,4 @@
+# ignore training outputs
+sac_local/
+td3_local/
+

@@ -1,17 +1,21 @@
+# This script trains a Twin Delayed Deep Deterministic Policy Gradient (TD3) agent on the Hopper-v4 environment for continuous-control performance.
 # ============================================
 # 1) Create directories for saving models & logs
 # ============================================
 import os
 import gymnasium as gym
-from stable_baselines3 import SAC
+
+from stable_baselines3 import TD3
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback
+from stable_baselines3.common.noise import NormalActionNoise
+import numpy as np
 
-base_dir = "./sac_local"
-drive_model_path = os.path.join(base_dir, "sac_models")
-save_path = os.path.join(drive_model_path, "sac_hopper")
-log_dir = os.path.join(base_dir, "sac_logs", "sac_default")
+base_dir = "./td3_local"
+drive_model_path = os.path.join(base_dir, "td3_models")
+save_path = os.path.join(drive_model_path, "td3_hopper")
+log_dir = os.path.join(base_dir, "td3_logs", "td3_default")
 
 for d in [base_dir, drive_model_path, save_path, log_dir]:
     os.makedirs(d, exist_ok=True)
@@ -35,9 +39,19 @@ eval_env = DummyVecEnv([make_env])
 
 
 # ============================================
-# 3) Build SAC model with hyperparameters
+# 3) Create action noise for TD3 exploration
 # ============================================
-model = SAC(
+n_actions = env.action_space.shape[-1]
+action_noise = NormalActionNoise(
+    mean=np.zeros(n_actions),
+    sigma=0.1 * np.ones(n_actions),
+)
+
+
+# ============================================
+# 4) Build TD3 model with hyperparameters
+# ============================================
+model = TD3(
     policy="MlpPolicy",
     env=env,
     verbose=1,
@@ -47,16 +61,18 @@ model = SAC(
     batch_size=256,
     gamma=0.99,
     tau=0.005,
-    ent_coef="auto",
     train_freq=1,
     gradient_steps=1,
+    action_noise=action_noise,
     tensorboard_log=log_dir,
-    policy_kwargs=dict(net_arch=[256, 256])
+    policy_kwargs=dict(
+        net_arch=dict(pi=[256, 256], qf=[256, 256])
+    )
 )
 
 
 # ============================================
-# 4) Define callbacks for evaluation & checkpoint saving
+# 5) Define callbacks for evaluation & checkpoint saving
 # ============================================
 eval_callback = EvalCallback(
     eval_env,
@@ -71,16 +87,16 @@ eval_callback = EvalCallback(
 checkpoint_callback = CheckpointCallback(
     save_freq=10_000,
     save_path=save_path,
-    name_prefix="sac_checkpoint"
+    name_prefix="td3_checkpoint",
 )
 
 
 # ============================================
-# 5) Train SAC agent
+# 6) Train TD3 agent
 # ============================================
 TOTAL_STEPS = 500_000
 
-print(f"Start training {TOTAL_STEPS:,} steps...")
+print(f"Start training TD3 for {TOTAL_STEPS:,} steps...")
 model.learn(
     total_timesteps=TOTAL_STEPS,
     callback=[eval_callback, checkpoint_callback],
@@ -89,9 +105,9 @@ model.learn(
 
 
 # ============================================
-# 6) Save final trained SAC model
+# 7) Save final trained TD3 model
 # ============================================
-final_model_path = os.path.join(save_path, "sac_hopper")
+final_model_path = os.path.join(save_path, "td3_hopper")
 model.save(final_model_path)
 print(f"Training complete! Saved to: {final_model_path}")
 print(f"TensorBoard: tensorboard --logdir {log_dir}")
